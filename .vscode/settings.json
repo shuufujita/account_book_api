@@ -1,0 +1,25 @@
+{
+	"go.gopath": "${env:GOPATH}",
+	"go.buildOnSave": "off",
+	"go.lintOnSave": "workspace",
+	"go.formatTool": "goimports",
+	"go.installDependenciesWhenBuilding": true,
+	"[go]": {
+		"editor.insertSpaces": false,
+		"editor.formatOnSave": true,
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": true
+		},
+		"editor.snippetSuggestions": "none",
+	},
+	"go.useLanguageServer": true,
+	"gopls": {
+		"hoverKind": "SynopsisDocumentation",
+		"usePlaceholders": true,
+		"linkTarget": "pkg.go.dev",
+		"staticcheck": false,
+		"completionDocumentation": true,
+		"completeUnimported": true,
+		"deepCompletion": true
+	}
+}
