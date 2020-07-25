@@ -44,13 +44,13 @@ func (th tokenHandler) IssueToken(c echo.Context) error {
 	}
 	verifyToken, err := client.VerifyIDToken(c.Request().Context(), request.IDToken)
 	if err != nil {
-		return response.ErrorResponse(c, "INTERNAL_SERVER_ERROR", err.Error())
+		return response.ErrorResponse(c, "AUTHORIZATION_ERROR", err.Error())
 	}
 
 	// トークン情報を生成する
 	token, err := th.tokenUsecase.Generate(verifyToken.UID)
 	if err != nil {
-		return response.ErrorResponse(c, "INTERNAL_SERVER_ERROR", err.Error())
+		return response.ErrorResponse(c, "TOKEN_GENERATE_ERROR", err.Error())
 	}
 
 	return c.JSON(http.StatusOK, token)

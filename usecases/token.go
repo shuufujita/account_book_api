@@ -56,7 +56,12 @@ func (tu tokenUsecase) Generate(userID string) (model.Token, error) {
 	}
 
 	// リフレッシュトークンをキャッシュに保存する
-	err = tu.repository.SaveRefreshToken(userID, refreshTokenString, int(refreshTokenExpire))
+	ttl, err := strconv.Atoi(os.Getenv("REFRESH_TOKEN_EXPIRATION_MINUTES"))
+	if err != nil {
+		log.Println(fmt.Sprintf("%v: [%v] %v", "error", userID, err.Error()))
+		return model.Token{}, err
+	}
+	err = tu.repository.SaveRefreshToken(userID, refreshTokenString, ttl)
 	if err != nil {
 		log.Println(fmt.Sprintf("%v: [%v] %v", "error", userID, err.Error()))
 		return model.Token{}, err
